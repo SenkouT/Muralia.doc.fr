@@ -21,6 +21,9 @@ const zoomLevelSpan = document.getElementById('zoom-level');
 const loadingDiv = document.getElementById('loading');
 const fullscreenBtn = document.getElementById('fullscreen');
 
+// Commands to highlight
+const COMMANDS = ['/lg join', '/jukebox', '/lg ready'];
+
 // Render page
 function renderPage(num) {
     pageRendering = true;
@@ -42,18 +45,57 @@ function renderPage(num) {
         };
 
         page.render(renderContext).promise.then(() => {
-            pdfRender.innerHTML = '';
-            pdfRender.appendChild(canvas);
-            pageRendering = false;
-            loadingDiv.style.display = 'none';
+            // Extract and highlight text
+            page.getTextContent().then(textContent => {
+                highlightCommandsOnCanvas(context, textContent, viewport, canvas);
+                
+                pdfRender.innerHTML = '';
+                pdfRender.appendChild(canvas);
+                pageRendering = false;
+                loadingDiv.style.display = 'none';
 
-            if (pageNumPending !== null) {
-                pageNum = pageNumPending;
-                pageNumPending = null;
-                renderPage(pageNum);
+                if (pageNumPending !== null) {
+                    pageNum = pageNumPending;
+                    pageNumPending = null;
+                    renderPage(pageNum);
+                }
+            });
+        });
+    });
+}
+
+// Highlight commands on canvas
+function highlightCommandsOnCanvas(context, textContent, viewport, canvas) {
+    // Save original context state
+    const originalFillStyle = context.fillStyle;
+    
+    // Find text items containing commands
+    textContent.items.forEach(item => {
+        COMMANDS.forEach(command => {
+            if (item.str.includes(command)) {
+                // Highlight with green glow effect
+                context.fillStyle = '#00FF00';
+                context.shadowColor = 'rgba(0, 255, 0, 0.8)';
+                context.shadowBlur = 10;
+                
+                // Draw highlight rectangle
+                const padding = 2;
+                context.fillRect(
+                    item.transform[4] - padding,
+                    item.transform[5] - padding,
+                    item.width + (padding * 2),
+                    item.height + (padding * 2)
+                );
+                
+                // Restore original text
+                context.fillStyle = originalFillStyle;
+                context.shadowColor = 'transparent';
             }
         });
     });
+    
+    // Restore original context state
+    context.fillStyle = originalFillStyle;
 }
 
 // Queue page rendering
@@ -66,7 +108,7 @@ function queueRenderPage(num) {
         pageNumPending = num;
     } else {
         pageNum = num;
-        renderPage(num);
+        renderPage(pageNum);
     }
 
     pageNumInput.value = pageNum;
@@ -137,22 +179,13 @@ pdfjsLib.getDocument(pdfFile).promise.then(doc => {
     renderPage(pageNum);
     loadingDiv.style.display = 'none';
 
-    // Highlight commands in the PDF text
-    highlightCommands();
+    console.log('PDF chargé avec succès - ' + pdfDoc.numPages + ' pages');
+    console.log('Commandes mises en évidence:', COMMANDS);
 }).catch(error => {
     console.error('Erreur au chargement du PDF:', error);
     loadingDiv.textContent = 'Erreur au chargement du PDF. Vérifiez que le fichier existe.';
+    loadingDiv.style.color = '#FF0000';
 });
-
-// Highlight commands function
-function highlightCommands() {
-    const commands = ['/lg join', '/jukebox', '/lg ready'];
-    
-    // This would require text extraction and DOM manipulation
-    // For now, commands will appear in green when rendered on canvas
-    // A more advanced implementation would use PDF text layer
-    console.log('Commandes à mettre en évidence:', commands);
-}
 
 // Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
