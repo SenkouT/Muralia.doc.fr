@@ -3,84 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loup-Garou Minecraft - Documentation Officielle</title>
+    <title>Loup-Garou Minecraft - Documentation</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
-    <div class="main-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>🐺 Loup-Garou</h2>
-                <p>Documentation</p>
-            </div>
+    <!-- Menu Burger -->
+    <div class="menu-burger">
+        <button id="menu-toggle" class="menu-toggle">☰</button>
+    </div>
 
-            <div class="sidebar-controls">
-                <a href="Loup-Garou_Minecraft_Documentation.pdf" class="btn btn-download" download>
-                    📥 Télécharger PDF
-                </a>
-            </div>
+    <!-- Navigation Sidebar -->
+    <nav class="nav-sidebar" id="nav-sidebar">
+        <button class="nav-btn active" data-tab="doc">📄 Doc</button>
+        <button class="nav-btn" data-tab="boutique">🛍️ Boutique</button>
+    </nav>
 
-            <div class="sidebar-info">
-                <h3>ℹ️ À Propos</h3>
-                <p>
-                    Documentation complète du mode de jeu Loup-Garou Minecraft avec intégration Discord.
-                </p>
-                <p>
-                    <strong>Version:</strong> 1.0<br>
-                    <strong>Date:</strong> 18 Août 2026
-                </p>
-            </div>
+    <!-- Doc Tab -->
+    <div class="tab-content active" id="doc-tab">
+        <div class="toolbar">
+            <button id="prev-page" class="btn">◀ Précédent</button>
+            <input type="number" id="page-num" class="page-input" min="1" value="1">
+            <span id="page-count" class="page-count">/ 0</span>
+            <button id="next-page" class="btn">Suivant ▶</button>
+            
+            <button id="zoom-out" class="btn">🔍-</button>
+            <span id="zoom-level" class="zoom-level">100%</span>
+            <button id="zoom-in" class="btn">🔍+</button>
+        </div>
 
-            <div class="sidebar-features">
-                <h3>📋 Contenu</h3>
-                <ul>
-                    <li>🎮 Règles du jeu</li>
-                    <li>👥 Rôles & Compétences</li>
-                    <li>🤖 Intégration Discord</li>
-                    <li>⚙️ Configuration</li>
-                </ul>
-            </div>
-        </aside>
+        <div class="pdf-viewer">
+            <div id="pdf-render" class="pdf-render"></div>
+            <div id="loading" class="loading">Chargement du PDF...</div>
+        </div>
+    </div>
 
-        <!-- Main Content -->
-        <main class="pdf-viewer-container">
-            <div class="pdf-toolbar">
-                <div class="toolbar-left">
-                    <button id="prev-page" class="toolbar-btn" title="Page précédente">
-                        ◀ Précédent
-                    </button>
-                    <input type="number" id="page-num" class="page-input" min="1" value="1">
-                    <span id="page-count" class="page-count">/ 0</span>
-                    <button id="next-page" class="toolbar-btn" title="Page suivante">
-                        Suivant ▶
-                    </button>
+    <!-- Boutique Tab -->
+    <div class="tab-content" id="boutique-tab">
+        <div class="boutique-container">
+            <h1 class="boutique-title">Grades</h1>
+            <div class="grades-grid">
+                <div class="grade-card">
+                    <div class="grade-header"></div>
+                    <div class="grade-body">
+                        <button class="btn-acheter">Acheter</button>
+                    </div>
                 </div>
 
-                <div class="toolbar-right">
-                    <button id="zoom-out" class="toolbar-btn" title="Réduire">
-                        🔍-
-                    </button>
-                    <span id="zoom-level" class="zoom-level">100%</span>
-                    <button id="zoom-in" class="toolbar-btn" title="Agrandir">
-                        🔍+
-                    </button>
-                    <button id="fullscreen" class="toolbar-btn" title="Plein écran">
-                        ⛶
-                    </button>
+                <div class="grade-card">
+                    <div class="grade-header"></div>
+                    <div class="grade-body">
+                        <button class="btn-acheter">Acheter</button>
+                    </div>
+                </div>
+
+                <div class="grade-card">
+                    <div class="grade-header"></div>
+                    <div class="grade-body">
+                        <button class="btn-acheter">Acheter</button>
+                    </div>
                 </div>
             </div>
-
-            <div class="pdf-viewer">
-                <div id="pdf-render" class="pdf-render"></div>
-                <div id="loading" class="loading">Chargement du PDF...</div>
-            </div>
-
-            <div class="pdf-footer">
-                <p>Consultez la documentation complète du mode de jeu Loup-Garou Minecraft</p>
-            </div>
-        </main>
+        </div>
     </div>
 
     <script src="pdf-viewer.js"></script>
