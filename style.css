@@ -5,19 +5,21 @@
 }
 
 :root {
-    --primary-color: #8B0000;
+    --primary-color: #000000;
     --secondary-color: #1a1a1a;
     --accent-color: #FFD700;
-    --text-color: #333;
-    --light-bg: #f5f5f5;
-    --white: #ffffff;
-    --border-color: #ddd;
+    --command-color: #00FF00;
+    --text-color: #ffffff;
+    --light-bg: #0d0d0d;
+    --white: #1a1a1a;
+    --border-color: #333;
 }
 
 html, body {
     height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--light-bg);
+    color: var(--text-color);
 }
 
 body {
@@ -32,14 +34,15 @@ body {
 /* ========== SIDEBAR ========== */
 .sidebar {
     width: 280px;
-    background: linear-gradient(135deg, var(--secondary-color), #2a2a2a);
-    color: var(--white);
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    color: var(--text-color);
     padding: 30px 20px;
     overflow-y: auto;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.8);
     display: flex;
     flex-direction: column;
     gap: 30px;
+    border-right: 2px solid var(--accent-color);
 }
 
 .sidebar-header {
@@ -51,11 +54,13 @@ body {
 .sidebar-header h2 {
     font-size: 1.8em;
     margin-bottom: 5px;
+    color: var(--accent-color);
 }
 
 .sidebar-header p {
     opacity: 0.8;
     font-size: 0.9em;
+    color: var(--accent-color);
 }
 
 .sidebar-controls {
@@ -66,7 +71,7 @@ body {
 
 .btn-download {
     background-color: var(--accent-color);
-    color: var(--secondary-color);
+    color: #000000;
     padding: 12px 20px;
     border-radius: 6px;
     text-decoration: none;
@@ -76,17 +81,17 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 0.95em;
-    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
 }
 
 .btn-download:hover {
     background-color: #FFE135;
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(255, 215, 0, 0.4);
+    box-shadow: 0 6px 15px rgba(255, 215, 0, 0.7);
 }
 
 .sidebar-info {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 215, 0, 0.1);
     padding: 15px;
     border-radius: 8px;
     border-left: 3px solid var(--accent-color);
@@ -100,9 +105,10 @@ body {
 
 .sidebar-info p {
     font-size: 0.9em;
-    opacity: 0.9;
+    opacity: 0.95;
     margin-bottom: 8px;
     line-height: 1.4;
+    color: var(--text-color);
 }
 
 .sidebar-info strong {
@@ -110,15 +116,16 @@ body {
 }
 
 .sidebar-features {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 255, 0, 0.1);
     padding: 15px;
     border-radius: 8px;
+    border-left: 3px solid var(--command-color);
 }
 
 .sidebar-features h3 {
     font-size: 1.1em;
     margin-bottom: 10px;
-    color: var(--accent-color);
+    color: var(--command-color);
 }
 
 .sidebar-features ul {
@@ -129,6 +136,7 @@ body {
     padding: 5px 0;
     font-size: 0.95em;
     opacity: 0.9;
+    color: var(--text-color);
 }
 
 /* ========== PDF VIEWER ========== */
@@ -141,14 +149,14 @@ body {
 }
 
 .pdf-toolbar {
-    background: var(--white);
-    border-bottom: 2px solid var(--border-color);
+    background: #1a1a1a;
+    border-bottom: 2px solid var(--accent-color);
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(255, 215, 0, 0.2);
     flex-wrap: wrap;
 }
 
@@ -159,8 +167,8 @@ body {
 }
 
 .toolbar-btn {
-    background-color: var(--primary-color);
-    color: var(--white);
+    background-color: var(--accent-color);
+    color: #000000;
     border: none;
     padding: 8px 15px;
     border-radius: 5px;
@@ -168,12 +176,13 @@ body {
     font-weight: bold;
     transition: all 0.3s ease;
     font-size: 0.9em;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
 }
 
 .toolbar-btn:hover {
-    background-color: #a00000;
+    background-color: #FFE135;
     transform: translateY(-1px);
-    box-shadow: 0 2px 5px rgba(139, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
 }
 
 .toolbar-btn:active {
@@ -183,27 +192,29 @@ body {
 .page-input {
     width: 60px;
     padding: 8px;
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--accent-color);
     border-radius: 5px;
     text-align: center;
     font-weight: bold;
     font-size: 0.9em;
+    background-color: #1a1a1a;
+    color: var(--accent-color);
 }
 
 .page-input:focus {
     outline: none;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+    border-color: var(--command-color);
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
 }
 
 .page-count {
-    color: #666;
+    color: var(--accent-color);
     font-weight: bold;
     white-space: nowrap;
 }
 
 .zoom-level {
-    color: #666;
+    color: var(--accent-color);
     font-weight: bold;
     min-width: 50px;
     text-align: center;
@@ -217,13 +228,13 @@ body {
     justify-content: center;
     align-items: flex-start;
     padding: 20px;
-    background: #e0e0e0;
+    background: #000000;
     position: relative;
 }
 
 .pdf-render {
-    background: var(--white);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background: #1a1a1a;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
     max-width: 100%;
     height: auto;
 }
@@ -240,23 +251,24 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: var(--white);
+    background: #1a1a1a;
     padding: 30px 50px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
     font-size: 1.2em;
-    color: var(--primary-color);
+    color: var(--accent-color);
     font-weight: bold;
     animation: pulse 1.5s infinite;
     z-index: 100;
+    border: 2px solid var(--accent-color);
 }
 
 .pdf-footer {
-    background: var(--white);
-    border-top: 2px solid var(--border-color);
+    background: #1a1a1a;
+    border-top: 2px solid var(--accent-color);
     padding: 15px 20px;
     text-align: center;
-    color: #666;
+    color: var(--accent-color);
     font-size: 0.9em;
 }
 
@@ -275,16 +287,16 @@ body {
 }
 
 .pdf-viewer::-webkit-scrollbar-track {
-    background: #e0e0e0;
+    background: #1a1a1a;
 }
 
 .pdf-viewer::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
+    background: var(--accent-color);
     border-radius: 5px;
 }
 
 .pdf-viewer::-webkit-scrollbar-thumb:hover {
-    background: #a00000;
+    background: #FFE135;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -292,12 +304,16 @@ body {
 }
 
 .sidebar::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 215, 0, 0.1);
 }
 
 .sidebar::-webkit-scrollbar-thumb {
     background: var(--accent-color);
     border-radius: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--command-color);
 }
 
 /* ========== FULLSCREEN ========== */
@@ -312,6 +328,13 @@ body {
     z-index: 999;
     border-radius: 0;
     padding: 0;
+}
+
+/* ========== COMMAND HIGHLIGHTING ========== */
+.command-highlight {
+    color: var(--command-color);
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
 /* ========== RESPONSIVE ========== */
@@ -347,6 +370,8 @@ body {
         justify-content: space-between;
         align-items: center;
         overflow-x: auto;
+        border-right: none;
+        border-bottom: 2px solid var(--accent-color);
     }
 
     .sidebar-header {
