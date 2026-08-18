@@ -20,6 +20,54 @@ const zoomOutBtn = document.getElementById('zoom-out');
 const zoomLevelSpan = document.getElementById('zoom-level');
 const loadingDiv = document.getElementById('loading');
 
+// Menu Toggle
+const menuToggle = document.getElementById('menu-toggle');
+const navSidebar = document.getElementById('nav-sidebar');
+const navBtns = document.querySelectorAll('.nav-btn');
+const docTab = document.getElementById('doc-tab');
+const boutiqueTab = document.getElementById('boutique-tab');
+
+// Menu burger toggle
+menuToggle.addEventListener('click', () => {
+    navSidebar.classList.toggle('active');
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.menu-burger') && !e.target.closest('.nav-sidebar')) {
+        navSidebar.classList.remove('active');
+    }
+});
+
+// Tab switching
+navBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        navBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Hide all tabs
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+
+        // Show selected tab
+        const tabId = btn.getAttribute('data-tab');
+        if (tabId === 'doc') {
+            docTab.classList.add('active');
+            // Render PDF page when switching to doc tab
+            if (pdfDoc) {
+                renderPage(pageNum);
+            }
+        } else if (tabId === 'boutique') {
+            boutiqueTab.classList.add('active');
+        }
+
+        // Close menu
+        navSidebar.classList.remove('active');
+    });
+});
+
 // Render page
 function renderPage(num) {
     pageRendering = true;
