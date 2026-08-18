@@ -6,199 +6,151 @@
 
 :root {
     --primary-color: #000000;
-    --secondary-color: #1a1a1a;
     --accent-color: #FFD700;
     --command-color: #00FF00;
     --text-color: #ffffff;
-    --light-bg: #0d0d0d;
-    --white: #1a1a1a;
-    --border-color: #333;
 }
 
 html, body {
     height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--light-bg);
+    background-color: var(--primary-color);
     color: var(--text-color);
-}
-
-body {
     overflow: hidden;
 }
 
-.main-container {
+/* Menu Burger */
+.menu-burger {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 15px 20px;
+}
+
+.menu-toggle {
+    background-color: var(--accent-color);
+    color: #000000;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1.5em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle:hover {
+    background-color: #FFE135;
+    transform: scale(1.1);
+}
+
+/* Navigation Sidebar */
+.nav-sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    border-right: 2px solid var(--accent-color);
+    padding: 80px 0 20px 0;
+    transition: left 0.3s ease;
+    z-index: 999;
     display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-sidebar.active {
+    left: 0;
+}
+
+.nav-btn {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 2px solid transparent;
+    padding: 15px 20px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.nav-btn:hover {
+    background-color: rgba(255, 215, 0, 0.1);
+    border-color: var(--accent-color);
+    transform: translateX(5px);
+}
+
+.nav-btn.active {
+    background-color: var(--accent-color);
+    color: #000000;
+    border-color: var(--accent-color);
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    width: 100%;
     height: 100vh;
 }
 
-/* ========== SIDEBAR ========== */
-.sidebar {
-    width: 280px;
-    background: linear-gradient(135deg, #000000, #1a1a1a);
-    color: var(--text-color);
-    padding: 30px 20px;
-    overflow-y: auto;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.8);
+.tab-content.active {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    border-right: 2px solid var(--accent-color);
 }
 
-.sidebar-header {
-    text-align: center;
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 20px;
+#doc-tab {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
-.sidebar-header h2 {
-    font-size: 1.8em;
-    margin-bottom: 5px;
-    color: var(--accent-color);
-}
-
-.sidebar-header p {
-    opacity: 0.8;
-    font-size: 0.9em;
-    color: var(--accent-color);
-}
-
-.sidebar-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.btn-download {
-    background-color: var(--accent-color);
-    color: #000000;
-    padding: 12px 20px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.95em;
-    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
-}
-
-.btn-download:hover {
-    background-color: #FFE135;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(255, 215, 0, 0.7);
-}
-
-.sidebar-info {
-    background: rgba(255, 215, 0, 0.1);
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 3px solid var(--accent-color);
-}
-
-.sidebar-info h3 {
-    font-size: 1.1em;
-    margin-bottom: 10px;
-    color: var(--accent-color);
-}
-
-.sidebar-info p {
-    font-size: 0.9em;
-    opacity: 0.95;
-    margin-bottom: 8px;
-    line-height: 1.4;
-    color: var(--text-color);
-}
-
-.sidebar-info strong {
-    color: var(--accent-color);
-}
-
-.sidebar-features {
-    background: rgba(0, 255, 0, 0.1);
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 3px solid var(--command-color);
-}
-
-.sidebar-features h3 {
-    font-size: 1.1em;
-    margin-bottom: 10px;
-    color: var(--command-color);
-}
-
-.sidebar-features ul {
-    list-style: none;
-}
-
-.sidebar-features li {
-    padding: 5px 0;
-    font-size: 0.95em;
-    opacity: 0.9;
-    color: var(--text-color);
-}
-
-/* ========== PDF VIEWER ========== */
-.pdf-viewer-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background: var(--light-bg);
-    overflow: hidden;
-}
-
-.pdf-toolbar {
+/* Toolbar */
+.toolbar {
     background: #1a1a1a;
     border-bottom: 2px solid var(--accent-color);
     padding: 15px 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
-    box-shadow: 0 2px 5px rgba(255, 215, 0, 0.2);
+    gap: 15px;
     flex-wrap: wrap;
+    margin-top: 0;
 }
 
-.toolbar-left, .toolbar-right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.toolbar-btn {
+.btn {
     background-color: var(--accent-color);
     color: #000000;
     border: none;
-    padding: 8px 15px;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
     transition: all 0.3s ease;
-    font-size: 0.9em;
-    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+    font-size: 1em;
 }
 
-.toolbar-btn:hover {
+.btn:hover {
     background-color: #FFE135;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
-}
-
-.toolbar-btn:active {
-    transform: translateY(0);
+    transform: translateY(-2px);
 }
 
 .page-input {
     width: 60px;
-    padding: 8px;
+    padding: 10px;
     border: 2px solid var(--accent-color);
     border-radius: 5px;
     text-align: center;
     font-weight: bold;
-    font-size: 0.9em;
     background-color: #1a1a1a;
     color: var(--accent-color);
+    font-size: 1em;
 }
 
 .page-input:focus {
@@ -220,6 +172,7 @@ body {
     text-align: center;
 }
 
+/* PDF Viewer */
 .pdf-viewer {
     flex: 1;
     overflow-y: auto;
@@ -229,7 +182,6 @@ body {
     align-items: flex-start;
     padding: 20px;
     background: #000000;
-    position: relative;
 }
 
 .pdf-render {
@@ -259,17 +211,7 @@ body {
     color: var(--accent-color);
     font-weight: bold;
     animation: pulse 1.5s infinite;
-    z-index: 100;
     border: 2px solid var(--accent-color);
-}
-
-.pdf-footer {
-    background: #1a1a1a;
-    border-top: 2px solid var(--accent-color);
-    padding: 15px 20px;
-    text-align: center;
-    color: var(--accent-color);
-    font-size: 0.9em;
 }
 
 @keyframes pulse {
@@ -281,171 +223,139 @@ body {
     }
 }
 
-/* ========== SCROLLBAR ========== */
-.pdf-viewer::-webkit-scrollbar {
+/* Boutique */
+.boutique-container {
+    width: 100%;
+    height: 100%;
+    padding: 40px 20px;
+    overflow-y: auto;
+    background: #000000;
+}
+
+.boutique-title {
+    text-align: center;
+    color: var(--accent-color);
+    font-size: 2.5em;
+    margin-bottom: 50px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.grades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grade-card {
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.grade-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    border-color: var(--command-color);
+}
+
+.grade-header {
+    background: linear-gradient(135deg, var(--accent-color), #FFE135);
+    height: 150px;
+    position: relative;
+}
+
+.grade-body {
+    padding: 30px 20px;
+    text-align: center;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-acheter {
+    background-color: var(--command-color);
+    color: #000000;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 255, 0, 0.3);
+}
+
+.btn-acheter:hover {
+    background-color: #00FF66;
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 255, 0, 0.5);
+}
+
+.btn-acheter:active {
+    transform: scale(0.98);
+}
+
+/* Scrollbar */
+.pdf-viewer::-webkit-scrollbar,
+.boutique-container::-webkit-scrollbar {
     width: 10px;
 }
 
-.pdf-viewer::-webkit-scrollbar-track {
+.pdf-viewer::-webkit-scrollbar-track,
+.boutique-container::-webkit-scrollbar-track {
     background: #1a1a1a;
 }
 
-.pdf-viewer::-webkit-scrollbar-thumb {
+.pdf-viewer::-webkit-scrollbar-thumb,
+.boutique-container::-webkit-scrollbar-thumb {
     background: var(--accent-color);
     border-radius: 5px;
 }
 
-.pdf-viewer::-webkit-scrollbar-thumb:hover {
+.pdf-viewer::-webkit-scrollbar-thumb:hover,
+.boutique-container::-webkit-scrollbar-thumb:hover {
     background: #FFE135;
 }
 
-.sidebar::-webkit-scrollbar {
-    width: 8px;
-}
-
-.sidebar::-webkit-scrollbar-track {
-    background: rgba(255, 215, 0, 0.1);
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-    background: var(--accent-color);
-    border-radius: 4px;
-}
-
-.sidebar::-webkit-scrollbar-thumb:hover {
-    background: var(--command-color);
-}
-
-/* ========== FULLSCREEN ========== */
-.pdf-viewer.fullscreen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999;
-    border-radius: 0;
-    padding: 0;
-}
-
-/* ========== COMMAND HIGHLIGHTING ========== */
-.command-highlight {
-    color: var(--command-color);
-    font-weight: bold;
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-}
-
-/* ========== RESPONSIVE ========== */
-@media (max-width: 1024px) {
-    .sidebar {
-        width: 250px;
-        padding: 20px 15px;
-        gap: 20px;
-    }
-
-    .pdf-toolbar {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .toolbar-left, .toolbar-right {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
 @media (max-width: 768px) {
-    .main-container {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        max-height: 120px;
-        padding: 15px;
-        gap: 10px;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        overflow-x: auto;
-        border-right: none;
-        border-bottom: 2px solid var(--accent-color);
-    }
-
-    .sidebar-header {
-        border-bottom: none;
-        border-right: 2px solid var(--accent-color);
-        padding: 0 15px 0 0;
-        min-width: 150px;
-    }
-
-    .sidebar-header h2 {
-        font-size: 1.3em;
-    }
-
-    .sidebar-header p {
-        font-size: 0.8em;
-    }
-
-    .sidebar-controls,
-    .sidebar-info,
-    .sidebar-features {
-        display: none;
-    }
-
-    .pdf-viewer-container {
-        flex: 1;
-    }
-
-    .pdf-toolbar {
+    .toolbar {
         padding: 10px;
         gap: 8px;
     }
 
-    .toolbar-btn {
-        padding: 6px 10px;
-        font-size: 0.8em;
+    .btn {
+        padding: 8px 12px;
+        font-size: 0.85em;
     }
 
     .page-input {
         width: 50px;
-        padding: 6px;
-        font-size: 0.8em;
+        padding: 8px;
+        font-size: 0.85em;
     }
 
     .pdf-viewer {
         padding: 10px;
     }
-}
 
-@media (max-width: 480px) {
-    .sidebar {
-        max-height: 100px;
-        padding: 10px;
+    .boutique-title {
+        font-size: 1.8em;
+        margin-bottom: 30px;
     }
 
-    .sidebar-header h2 {
-        font-size: 1.1em;
+    .grades-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 
-    .pdf-toolbar {
-        padding: 8px;
-    }
-
-    .toolbar-btn {
-        padding: 5px 8px;
-        font-size: 0.7em;
-    }
-
-    .page-input {
-        width: 40px;
-        padding: 5px;
-        font-size: 0.7em;
-    }
-
-    .page-count, .zoom-level {
-        font-size: 0.8em;
+    .boutique-container {
+        padding: 20px 10px;
     }
 }
