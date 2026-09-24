@@ -3,70 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loup-Garou Minecraft - Documentation</title>
+    <title>BikeBuilder.com — Configurateur vélo</title>
+    <meta name="description" content="Construisez votre vélo, vérifiez la compatibilité des composants et comparez les offres disponibles avec BikeBuilder.com.">
+    <meta name="theme-color" content="#f4f7fb">
+    <link rel="canonical" href="https://bikebuilder.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bikebuilder.com/">
+    <meta property="og:title" content="BikeBuilder.com — Configurateur vélo">
+    <meta property="og:description" content="Composez un vélo cohérent, contrôlez les compatibilités et comparez les prix.">
+    <meta property="og:site_name" content="BikeBuilder.com">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
-    <!-- Menu Burger -->
-    <div class="menu-burger">
-        <button id="menu-toggle" class="menu-toggle">☰</button>
-    </div>
-
-    <!-- Navigation Sidebar -->
-    <nav class="nav-sidebar" id="nav-sidebar">
-        <button class="nav-btn active" data-tab="doc">📄 Doc</button>
-        <button class="nav-btn" data-tab="boutique">🛍️ Boutique</button>
-    </nav>
-
-    <!-- Doc Tab -->
-    <div class="tab-content active" id="doc-tab">
-        <div class="toolbar">
-            <button id="prev-page" class="btn">◀ Précédent</button>
-            <input type="number" id="page-num" class="page-input" min="1" value="1">
-            <span id="page-count" class="page-count">/ 0</span>
-            <button id="next-page" class="btn">Suivant ▶</button>
-            
-            <button id="zoom-out" class="btn">🔍-</button>
-            <span id="zoom-level" class="zoom-level">100%</span>
-            <button id="zoom-in" class="btn">🔍+</button>
-        </div>
-
-        <div class="pdf-viewer">
-            <div id="pdf-render" class="pdf-render"></div>
-            <div id="loading" class="loading">Chargement du PDF...</div>
-        </div>
-    </div>
-
-    <!-- Boutique Tab -->
-    <div class="tab-content" id="boutique-tab">
-        <div class="boutique-container">
-            <h1 class="boutique-title">Grades</h1>
-            <div class="grades-grid">
-                <div class="grade-card">
-                    <div class="grade-header"></div>
-                    <div class="grade-body">
-                        <button class="btn-acheter">Acheter</button>
-                    </div>
+    <main class="bikebuilder-container">
+        <header class="bikebuilder-header">
+            <div class="header-content">
+                <div class="header-branding">
+                    <p class="eyebrow">bikebuilder.com</p>
+                    <h1>BikeBuilder</h1>
                 </div>
+                <a class="site-url" href="https://bikebuilder.com/" rel="home">bikebuilder.com</a>
+            </div>
+            <p class="header-description">Construisez votre vélo, vérifiez les compatibilités et trouvez les meilleures offres.</p>
+            <div class="demo-badge">Données de test</div>
+        </header>
 
-                <div class="grade-card">
-                    <div class="grade-header"></div>
-                    <div class="grade-body">
-                        <button class="btn-acheter">Acheter</button>
-                    </div>
-                </div>
-
-                <div class="grade-card">
-                    <div class="grade-header"></div>
-                    <div class="grade-body">
-                        <button class="btn-acheter">Acheter</button>
-                    </div>
-                </div>
+        <div class="builder-progress">
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill" style="width: 10%"></div>
+            </div>
+            <div class="progress-steps">
+                <div class="step active" data-step="0">Cadre</div>
+                <div class="step" data-step="1">Fourche</div>
+                <div class="step" data-step="2">Roues</div>
+                <div class="step" data-step="3">Pneus</div>
+                <div class="step" data-step="4">Transmission</div>
+                <div class="step" data-step="5">Freinage</div>
+                <div class="step" data-step="6">Cockpit</div>
+                <div class="step" data-step="7">Selle</div>
+                <div class="step" data-step="8">Pédales</div>
+                <div class="step" data-step="9">Accessoires</div>
             </div>
         </div>
-    </div>
 
-    <script src="pdf-viewer.js"></script>
+        <div class="bikebuilder-layout">
+            <section class="configurator-panel">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow" id="step-label">Étape 1</p>
+                        <h2 id="step-title">Cadre</h2>
+                        <p id="step-description" class="step-description"></p>
+                    </div>
+                    <button class="text-button" id="reset-bike" type="button">Recommencer</button>
+                </div>
+                <div id="component-options" class="component-options"></div>
+                <div class="step-navigation">
+                    <button id="prev-step" class="btn-secondary" type="button">← Précédent</button>
+                    <button id="next-step" class="btn-primary" type="button">Suivant →</button>
+                </div>
+            </section>
+
+            <aside class="summary-panel">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Votre montage</p>
+                        <h2>Résumé</h2>
+                    </div>
+                    <span id="selection-count" class="selection-count">0/10</span>
+                </div>
+                <div id="compatibility-status" class="compatibility-status"></div>
+                <div id="selected-components" class="selected-components"></div>
+                <div class="total-row">
+                    <span>Total estimé</span>
+                    <strong id="bike-total">0,00 €</strong>
+                </div>
+                <div class="summary-actions">
+                    <button id="save-config" class="btn-secondary" type="button">💾 Enregistrer</button>
+                    <button id="compare-offers" class="btn-primary" type="button">Comparer les offres</button>
+                </div>
+                <p class="fine-print">Prix indicatifs de démonstration, non contractuels.</p>
+            </aside>
+        </div>
+
+        <section id="offers-section" class="offers-section" hidden>
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Étape finale</p>
+                    <h2>Comparaison des offres</h2>
+                </div>
+                <span class="demo-badge">Données de test</span>
+            </div>
+            <div id="offers-grid" class="offers-grid"></div>
+            <button class="btn-secondary full-width" id="back-to-config" type="button">← Retour au configurateur</button>
+        </section>
+
+        <section id="saved-section" class="saved-section" hidden>
+            <div class="section-heading">
+                <h2>Mes configurations</h2>
+            </div>
+            <div id="saved-list" class="saved-list"></div>
+            <button class="btn-secondary" id="back-from-saved" type="button">← Retour</button>
+        </section>
+    </main>
+
+    <script src="bikebuilder-full.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
