@@ -2,7 +2,7 @@
 
 Configurateur vélo statique complet avec moteur de compatibilité, comparaison de prix et sauvegarde des configurations.
 
-**URL de production :** https://bikebuilder.com/
+**URL publiée :** https://senkout.github.io/Muralia.doc.fr/
 
 ## Démarrage rapide
 

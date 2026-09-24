@@ -343,7 +343,7 @@ Optimisations futures :
 
 ## SEO
 
-- Canonical : `https://bikebuilder.com/`
+- Canonical : `https://senkout.github.io/Muralia.doc.fr/`
 - Description meta
 - Open Graph (og:title, og:description, og:image)
 - Titres structurés (h1, h2)
