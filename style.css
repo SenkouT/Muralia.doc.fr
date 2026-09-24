@@ -1,59 +1,482 @@
 * { box-sizing: border-box; }
-:root { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; color: #172033; background: #f4f7fb; }
+:root { 
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #f4f7fb;
+  line-height: 1.5;
+}
 body { margin: 0; min-width: 320px; }
 button, input { font: inherit; }
-.bikebuilder-container { width: min(1240px, 100%); margin: 0 auto; padding: 46px 28px 72px; }
-.bikebuilder-hero { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 34px; }
-.hero-actions { align-items: flex-end; display: flex; flex-direction: column; gap: 12px; }
-.site-url { color: #172033; font-size: .85rem; font-weight: 800; text-decoration: none; }
+
+.bikebuilder-container { width: min(1400px, 100%); margin: 0 auto; padding: 32px 20px 80px; }
+
+.bikebuilder-header {
+  margin-bottom: 48px;
+}
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+.header-branding h1 {
+  color: #172033;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  letter-spacing: -0.06em;
+  line-height: 1.1;
+  margin: 8px 0 0;
+}
+.header-description {
+  color: #5d6b82;
+  font-size: 1.05rem;
+  max-width: 680px;
+  margin: 12px 0 16px;
+}
+.eyebrow {
+  color: #5671d9;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin: 0 0 4px;
+  text-transform: uppercase;
+}
+.site-url {
+  color: #172033;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
 .site-url:hover { color: #5671d9; text-decoration: underline; }
-.bikebuilder-hero h1 { color: #172033; font-size: clamp(2.4rem, 6vw, 4.6rem); letter-spacing: -.06em; line-height: 1; margin: 8px 0 14px; }
-.bikebuilder-hero p:not(.eyebrow) { color: #5d6b82; font-size: 1.08rem; max-width: 620px; }
-.eyebrow { color: #5671d9; font-size: .75rem; font-weight: 800; letter-spacing: .14em; margin: 0; text-transform: uppercase; }
-.demo-badge, .recommendation { background: #fff2c2; border: 1px solid #edc84b; border-radius: 999px; color: #745a00; display: inline-flex; font-size: .75rem; font-weight: 800; letter-spacing: .04em; padding: 8px 12px; white-space: nowrap; }
-.bikebuilder-layout { align-items: start; display: grid; gap: 22px; grid-template-columns: minmax(0, 1.65fr) minmax(300px, .85fr); }
-.configurator-panel, .summary-panel, .offers-section { background: #fff; border: 1px solid #dfe6f2; border-radius: 18px; box-shadow: 0 12px 34px rgba(38, 56, 92, .08); padding: 26px; }
-.section-heading { align-items: center; display: flex; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
-.section-heading h2 { color: #172033; font-size: 1.3rem; margin: 4px 0 0; }
-.text-button { background: none; border: 0; color: #5671d9; cursor: pointer; font-weight: 700; }
-.component-group { border: 0; margin: 0 0 24px; padding: 0; }
-.component-group legend { color: #354259; font-size: .85rem; font-weight: 800; margin-bottom: 10px; }
-.component-options { display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); }
-.component-option { align-items: center; border: 1px solid #dfe6f2; border-radius: 12px; cursor: pointer; display: grid; gap: 8px; grid-template-columns: auto 1fr; padding: 13px; transition: border-color .2s, box-shadow .2s, transform .2s; }
-.component-option:hover, .component-option.selected { border-color: #6b83e3; box-shadow: 0 6px 16px rgba(86, 113, 217, .13); transform: translateY(-1px); }
-.component-option input { accent-color: #5671d9; }
-.component-option span { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-.component-option strong { color: #253149; font-size: .86rem; }
-.component-option small { color: #77839a; font-size: .73rem; }
-.component-option b { color: #253149; font-size: .8rem; grid-column: 2; }
-.selection-count { color: #5671d9; font-size: .85rem; font-weight: 800; }
-.compatibility-status { border-radius: 12px; display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; padding: 14px; }
-.compatibility-status span, .compatibility-status li { color: #5d6b82; font-size: .82rem; line-height: 1.45; }
-.compatibility-status ul { margin: 0; padding-left: 17px; }
-.is-valid { background: #e9f8ef; border: 1px solid #a8dfbb; color: #19713b; }
-.is-invalid { background: #fff0f0; border: 1px solid #efb0b0; color: #a33333; }
-.is-pending { background: #f3f5fa; border: 1px solid #dfe6f2; color: #516078; }
-.selected-components { display: flex; flex-direction: column; gap: 9px; min-height: 120px; }
-.selected-item { border-bottom: 1px solid #edf0f6; display: flex; flex-direction: column; gap: 2px; padding-bottom: 8px; }
-.selected-item span, .fine-print, .offer-note { color: #77839a; font-size: .75rem; }
-.selected-item strong { color: #253149; font-size: .86rem; }
-.empty-state { color: #77839a; font-size: .85rem; line-height: 1.5; }
-.total-row { align-items: baseline; border-top: 1px solid #e6ebf3; display: flex; justify-content: space-between; margin-top: 18px; padding-top: 18px; }
-.total-row span { color: #5d6b82; font-size: .85rem; }
-.total-row strong { color: #172033; font-size: 1.35rem; }
-.primary-button, .secondary-button { border-radius: 9px; cursor: pointer; font-weight: 800; margin-top: 18px; padding: 12px 16px; width: 100%; }
-.primary-button { background: #5671d9; border: 1px solid #5671d9; color: #fff; }
-.primary-button:disabled { background: #bec8e4; border-color: #bec8e4; cursor: not-allowed; }
-.secondary-button { background: #fff; border: 1px solid #cfd8ea; color: #5671d9; }
-.fine-print { margin: 12px 0 0; text-align: center; }
-.offers-section { margin-top: 22px; }
-.offers-grid { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); }
-.offer-card { border: 1px solid #dfe6f2; border-radius: 14px; display: flex; flex-direction: column; min-height: 220px; padding: 20px; position: relative; }
-.offer-card.recommended { border-color: #6b83e3; box-shadow: 0 8px 20px rgba(86, 113, 217, .14); }
-.offer-card .recommendation { align-self: flex-start; font-size: .68rem; padding: 5px 8px; }
-.offer-card h3 { color: #253149; margin: 17px 0 5px; }
-.offer-card p { color: #77839a; font-size: .8rem; min-height: 34px; }
-.offer-card > strong { color: #172033; font-size: 1.5rem; margin-top: auto; }
-.offer-card .secondary-button { margin-top: 12px; }
-@media (max-width: 900px) { .bikebuilder-layout { grid-template-columns: 1fr; } .component-options, .offers-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .bikebuilder-container { padding: 28px 14px 50px; } .bikebuilder-hero { flex-direction: column; } .hero-actions { align-items: flex-start; } .configurator-panel, .summary-panel, .offers-section { padding: 18px; } .component-options, .offers-grid { grid-template-columns: 1fr; } }
+
+.demo-badge {
+  background: #fff2c2;
+  border: 1px solid #edc84b;
+  border-radius: 999px;
+  color: #745a00;
+  display: inline-flex;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 8px 12px;
+  white-space: nowrap;
+}
+
+.builder-progress {
+  margin-bottom: 40px;
+}
+.progress-bar {
+  background: #e6ebf3;
+  border-radius: 4px;
+  height: 6px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.progress-fill {
+  background: linear-gradient(90deg, #5671d9, #6b83e3);
+  height: 100%;
+  transition: width 0.3s ease;
+}
+.progress-steps {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+.step {
+  background: #fff;
+  border: 1px solid #dfe6f2;
+  border-radius: 8px;
+  color: #77839a;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 10px 12px;
+  text-align: center;
+  transition: all 0.2s;
+}
+.step.active {
+  background: #5671d9;
+  border-color: #5671d9;
+  color: #fff;
+}
+.step.completed {
+  background: #e9f8ef;
+  border-color: #a8dfbb;
+  color: #19713b;
+}
+.step:hover:not(.active) {
+  border-color: #5671d9;
+  background: #f9fbfe;
+}
+
+.bikebuilder-layout {
+  align-items: start;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+}
+
+.configurator-panel, .summary-panel, .offers-section {
+  background: #fff;
+  border: 1px solid #dfe6f2;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(38, 56, 92, 0.08);
+  padding: 28px;
+}
+
+.section-heading {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.section-heading h2 {
+  color: #172033;
+  font-size: 1.4rem;
+  margin: 0;
+}
+.section-heading h2 + .selection-count {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #5671d9;
+}
+
+.step-description {
+  color: #77839a;
+  font-size: 0.95rem;
+  margin: 8px 0 0;
+}
+
+.component-options {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.component-option {
+  align-items: center;
+  border: 1px solid #dfe6f2;
+  border-radius: 12px;
+  cursor: pointer;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: auto 1fr auto;
+  padding: 14px 16px;
+  transition: all 0.2s;
+}
+.component-option:hover {
+  border-color: #6b83e3;
+  box-shadow: 0 4px 12px rgba(86, 113, 217, 0.12);
+  transform: translateY(-1px);
+}
+.component-option.selected {
+  background: #f0f4ff;
+  border-color: #5671d9;
+  box-shadow: 0 4px 12px rgba(86, 113, 217, 0.15);
+}
+.component-option input {
+  accent-color: #5671d9;
+  cursor: pointer;
+}
+.option-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.option-name {
+  color: #253149;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.option-detail {
+  color: #77839a;
+  font-size: 0.8rem;
+}
+.option-price {
+  color: #172033;
+  font-size: 0.95rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.step-navigation {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+.step-navigation button {
+  flex: 1;
+}
+
+.btn-primary, .btn-secondary {
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  padding: 12px 18px;
+  transition: all 0.2s;
+  border: 1px solid;
+}
+.btn-primary {
+  background: #5671d9;
+  border-color: #5671d9;
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) {
+  background: #4a5ec3;
+  border-color: #4a5ec3;
+  box-shadow: 0 6px 16px rgba(86, 113, 217, 0.3);
+}
+.btn-primary.finish {
+  background: #19713b;
+  border-color: #19713b;
+}
+.btn-primary.finish:hover:not(:disabled) {
+  background: #0f5a2a;
+}
+.btn-primary:disabled {
+  background: #bec8e4;
+  border-color: #bec8e4;
+  color: #fff;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.btn-secondary {
+  background: #fff;
+  border-color: #cfd8ea;
+  color: #5671d9;
+}
+.btn-secondary:hover:not(:disabled) {
+  background: #f9fbfe;
+  border-color: #5671d9;
+}
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.full-width {
+  width: 100%;
+}
+.text-button {
+  background: none;
+  border: 0;
+  color: #5671d9;
+  cursor: pointer;
+  font-weight: 700;
+  padding: 0;
+}
+.text-button:hover {
+  color: #4a5ec3;
+  text-decoration: underline;
+}
+
+.compatibility-status {
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 14px;
+}
+.compatibility-status strong {
+  font-size: 0.95rem;
+}
+.compatibility-status span, .compatibility-status li {
+  color: #5d6b82;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+.compatibility-status ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+.is-valid {
+  background: #e9f8ef;
+  border: 1px solid #a8dfbb;
+  color: #19713b;
+}
+.is-invalid {
+  background: #fff0f0;
+  border: 1px solid #efb0b0;
+  color: #a33333;
+}
+.is-pending {
+  background: #f3f5fa;
+  border: 1px solid #dfe6f2;
+  color: #516078;
+}
+
+.selected-components {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 140px;
+  margin-bottom: 20px;
+}
+.selected-item {
+  border-bottom: 1px solid #edf0f6;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 10px;
+}
+.selected-item span {
+  color: #77839a;
+  font-size: 0.75rem;
+}
+.selected-item strong {
+  color: #253149;
+  font-size: 0.9rem;
+}
+.empty-state {
+  color: #77839a;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.total-row {
+  align-items: baseline;
+  border-top: 1px solid #e6ebf3;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  padding-top: 16px;
+}
+.total-row span {
+  color: #5d6b82;
+  font-size: 0.9rem;
+}
+.total-row strong {
+  color: #172033;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.summary-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+.summary-actions button {
+  width: 100%;
+}
+
+.fine-print {
+  color: #77839a;
+  font-size: 0.75rem;
+  margin: 14px 0 0;
+  text-align: center;
+}
+
+.offers-section {
+  margin-top: 32px;
+}
+.offers-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-bottom: 20px;
+}
+
+.offer-card {
+  border: 1px solid #dfe6f2;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 240px;
+  padding: 20px;
+  position: relative;
+}
+.offer-card.recommended {
+  background: #f0f4ff;
+  border-color: #6b83e3;
+  box-shadow: 0 8px 20px rgba(86, 113, 217, 0.14);
+}
+.recommendation {
+  align-self: flex-start;
+  background: #fff2c2;
+  border: 1px solid #edc84b;
+  border-radius: 999px;
+  color: #745a00;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 5px 10px;
+}
+.offer-card h3 {
+  color: #253149;
+  font-size: 1.1rem;
+  margin: 0;
+}
+.offer-delivery {
+  color: #77839a;
+  font-size: 0.8rem;
+  margin: 0;
+}
+.offer-price-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: auto;
+}
+.offer-price {
+  color: #172033;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+.offer-shipping {
+  color: #5d6b82;
+  font-size: 0.8rem;
+}
+.offer-note {
+  color: #77839a;
+  font-size: 0.75rem;
+}
+.offer-card button {
+  margin-top: 12px;
+}
+
+@media (max-width: 1024px) {
+  .bikebuilder-layout {
+    grid-template-columns: 1fr;
+  }
+  .progress-steps {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .bikebuilder-container {
+    padding: 20px 12px 60px;
+  }
+  .header-content {
+    flex-direction: column;
+  }
+  .header-branding h1 {
+    font-size: 2rem;
+  }
+  .configurator-panel, .summary-panel, .offers-section {
+    padding: 18px;
+  }
+  .bikebuilder-layout {
+    gap: 20px;
+  }
+  .section-heading {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .progress-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .component-option {
+    grid-template-columns: auto 1fr;
+  }
+  .option-price {
+    grid-column: 1 / -1;
+    text-align: right;
+  }
+  .offers-grid {
+    grid-template-columns: 1fr;
+  }
+}
